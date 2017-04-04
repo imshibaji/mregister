@@ -1,0 +1,31 @@
+{% extends "AppBundle:Home:base.html.twig" %}
+
+{%
+ set name= 'Shibaji'
+%}
+
+
+{% block styles %}
+<link href="assets/css/frontend.css" rel="stylesheet" />
+{% endblock %}
+
+{% block title %}Home Page{% endblock %}
+{% block banner %}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <header>
+    <h2>This is my page Header</h2>
+  </header>
+
+  <div class="content">
+    <h3>This is my Page Contents</h3>
+  </div>
+
+  <footer>
+    <p>
+      &copy; Copyright Page Content
+    </p>
+  </footer>
+</div>
+{% endblock %}
