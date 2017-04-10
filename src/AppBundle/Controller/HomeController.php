@@ -5,10 +5,12 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\Page;
 
 class HomeController extends Controller
 {
+
     /**
      * @Route("/", name="Home")
      */
@@ -23,8 +25,9 @@ class HomeController extends Controller
         //echo $_GET['name'];
         //echo $req->request->get('name');
 
-
         return $this->render('AppBundle:Home:index.html.twig', array(
+            "basepath" => BASEPATH,
+            "title" => "Shibaji Debnath"
             //"id" => "Data Id: "+$this->createAction()
         ));
     }
@@ -44,4 +47,11 @@ class HomeController extends Controller
       return $page->getId();
     }
 
+
+    /**
+     * @Route("/hello", name="Hello")
+     */
+     public function helloAction(){
+       return new Response("Hello All");
+     }
 }

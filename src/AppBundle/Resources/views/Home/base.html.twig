@@ -5,11 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Bootstrap 101 Template{% endblock %}</title>
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    {% block style %}{% endblock %}
+    <link href="{{ basepath }}/assets/css/bootstrap.min.css" rel="stylesheet">
+    {% block styles %}{% endblock %}
 
   </head>
   <body>
+    {{ basepath }}
     {% block nav %}
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -66,7 +67,7 @@
     </div>
     {% endblock %}
 
-    <div class="container contents">
+    <div class="container">
       <!-- Example row of columns -->
       <div class="row">
         {% block content %}
@@ -98,7 +99,7 @@
     </div> <!-- /container -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    {% block script %}{% endblock %}
+    <script src="{{ basepath }}/assets/js/bootstrap.min.js"></script>
+    {% block scripts %}{% endblock %}
   </body>
 </html>
