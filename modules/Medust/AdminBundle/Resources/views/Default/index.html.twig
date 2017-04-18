@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Area</title>
+  {% stylesheets '@AdminBundle/Resources/Public/Default/css/*' filter='cssrewrite' %}
+      <link rel="stylesheet" href="{{ asset_url }}" />
+  {% endstylesheets %}
+</head>
+<body>
+  <h1>Hello Admin</h1>
+
+  {% javascripts '@AdminBundle/Resources/Public/Default/js/*' %}
+      <script src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+</body>
+</html>
