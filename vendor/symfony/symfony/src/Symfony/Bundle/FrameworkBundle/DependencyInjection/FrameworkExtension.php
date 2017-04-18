@@ -14,6 +14,7 @@ namespace Symfony\Bundle\FrameworkBundle\DependencyInjection;
 use Doctrine\Common\Annotations\Reader;
 use Symfony\Bridge\Monolog\Processor\DebugProcessor;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -110,7 +111,7 @@ class FrameworkExtension extends Extension
                     'macvim' => 'mvim://open?url=file://%%f&line=%%l',
                     'emacs' => 'emacs://open?url=file://%%f&line=%%l',
                     'sublime' => 'subl://open?url=file://%%f&line=%%l',
-                    'phpstorm' => 'phpstorm://open?url=file://%%f&line=%%l',
+                    'phpstorm' => 'phpstorm://open?file=%%f&line=%%l',
                 );
                 $ide = $config['ide'];
 
@@ -394,6 +395,10 @@ class FrameworkExtension extends Extension
     {
         if (!$workflows) {
             return;
+        }
+
+        if (!class_exists(Workflow\Workflow::class)) {
+            throw new LogicException('Workflow support cannot be enabled as the Workflow component is not installed.');
         }
 
         $loader->load('workflow.xml');
@@ -1256,10 +1261,16 @@ class FrameworkExtension extends Extension
         if (method_exists(PropertyAccessor::class, 'createCache')) {
             $propertyAccessDefinition = $container->register('cache.property_access', AdapterInterface::class);
             $propertyAccessDefinition->setPublic(false);
-            $propertyAccessDefinition->setFactory(array(PropertyAccessor::class, 'createCache'));
-            $propertyAccessDefinition->setArguments(array(null, null, $version, new Reference('logger', ContainerInterface::IGNORE_ON_INVALID_REFERENCE)));
-            $propertyAccessDefinition->addTag('cache.pool', array('clearer' => 'cache.default_clearer'));
-            $propertyAccessDefinition->addTag('monolog.logger', array('channel' => 'cache'));
+
+            if (!$container->getParameter('kernel.debug')) {
+                $propertyAccessDefinition->setFactory(array(PropertyAccessor::class, 'createCache'));
+                $propertyAccessDefinition->setArguments(array(null, null, $version, new Reference('logger', ContainerInterface::IGNORE_ON_INVALID_REFERENCE)));
+                $propertyAccessDefinition->addTag('cache.pool', array('clearer' => 'cache.default_clearer'));
+                $propertyAccessDefinition->addTag('monolog.logger', array('channel' => 'cache'));
+            } else {
+                $propertyAccessDefinition->setClass(ArrayAdapter::class);
+                $propertyAccessDefinition->setArguments(array(0, false));
+            }
         }
 
         $this->addClassesToCompile(array(
