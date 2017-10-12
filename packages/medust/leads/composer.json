@@ -1,0 +1,13 @@
+{
+    "name": "medust/leads",
+    "description": "This is the leads plugings",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Shibaji Debnath",
+            "email": "imshibaji@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}

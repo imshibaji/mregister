@@ -1,67 +1,70 @@
 {
-    "name": "shibaji/cms",
-    "license": "proprietary",
+    "name": "laravel/laravel",
+    "description": "The Laravel Framework.",
+    "keywords": ["framework", "laravel"],
+    "license": "MIT",
     "type": "project",
+    "repositories": [
+      {
+          "type": "vcs",
+          "url": "https://github.com/imshibaji/laravel-advanced-route.git"
+      }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "backup-manager/backup-manager": "^1.1",
+        "laravel/framework": "5.5.*",
+        "laravel/tinker": "~1.0",
+        "laravelcollective/annotations": "5.5.x-dev",
+        "laravelcollective/html": "^5.5",
+        "league/flysystem-aws-s3-v3": "^1.0",
+        "league/flysystem-dropbox": "^1.0",
+        "league/flysystem-rackspace": "^1.0",
+        "league/flysystem-sftp": "^1.0",
+        "lesichkovm/laravel-advanced-route": "dev-master",
+        "nesbot/carbon": "^1.22",
+        "predis/predis": "^1.1",
+        "filp/whoops":"~2.0"
+    },
+    "require-dev": {
+        "fzaninotto/faker": "~1.4",
+        "mockery/mockery": "0.9.*",
+        "phpunit/phpunit": "~6.0"
+    },
     "autoload": {
-        "psr-4": {
-            "": ["src/", "modules/"]
-        },
         "classmap": [
-            "app/AppKernel.php",
-            "app/AppCache.php"
-        ]
+            "database"
+        ],
+        "psr-4": {
+            "App\\": "app/",
+            "Medust\\Leads\\": "packages/medust/leads/src"
+        },
+        "files": ["app/Http/helpers/main.php"]
     },
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
         }
     },
-    "require": {
-        "php": ">=5.5.9",
-        "symfony/symfony": "3.2.*",
-        "doctrine/orm": "^2.5",
-        "doctrine/doctrine-bundle": "^1.6",
-        "doctrine/doctrine-cache-bundle": "^1.2",
-        "symfony/swiftmailer-bundle": "^2.3.10",
-        "symfony/monolog-bundle": "^3.0.2",
-        "symfony/polyfill-apcu": "^1.0",
-        "sensio/distribution-bundle": "^5.0",
-        "sensio/framework-extra-bundle": "^3.0.2",
-        "incenteev/composer-parameter-handler": "^2.0",
-        "twig/twig": "^1.0||^2.0",
-        "jasongrimes/paginator": "~1.0",
-        "symfony/assetic-bundle": "^2.8"
-    },
-    "require-dev": {
-        "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0"
-    },
     "scripts": {
-        "symfony-scripts": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+        "post-root-package-install": [
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "php artisan key:generate"
         ],
         "post-install-cmd": [
-            "@symfony-scripts"
+            "Illuminate\\Foundation\\ComposerScripts::postInstall",
+            "php artisan optimize"
         ],
         "post-update-cmd": [
-            "@symfony-scripts"
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "php artisan optimize"
         ]
     },
-    "extra": {
-        "symfony-app-dir": "app",
-        "symfony-bin-dir": "bin",
-        "symfony-var-dir": "var",
-        "symfony-web-dir": "web",
-        "symfony-tests-dir": "tests",
-        "symfony-assets-install": "relative",
-        "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
-        },
-        "branch-alias": null
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
     }
 }

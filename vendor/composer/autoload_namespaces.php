@@ -6,13 +6,14 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Twig_' => array($vendorDir . '/twig/twig/lib'),
-    'SensioLabs\\Security' => array($vendorDir . '/sensiolabs/security-checker'),
-    'JasonGrimes' => array($vendorDir . '/jasongrimes/paginator/src'),
-    'Doctrine\\ORM\\' => array($vendorDir . '/doctrine/orm/lib'),
-    'Doctrine\\DBAL\\' => array($vendorDir . '/doctrine/dbal/lib'),
+    'Prophecy\\' => array($vendorDir . '/phpspec/prophecy/src'),
+    'Parsedown' => array($vendorDir . '/erusev/parsedown'),
+    'OpenCloud' => array($vendorDir . '/rackspace/php-opencloud/lib'),
+    'Mockery' => array($vendorDir . '/mockery/mockery/library'),
+    'JakubOnderka\\PhpConsoleHighlighter' => array($vendorDir . '/jakub-onderka/php-console-highlighter/src'),
+    'JakubOnderka\\PhpConsoleColor' => array($vendorDir . '/jakub-onderka/php-console-color/src'),
+    'Guzzle\\Tests' => array($vendorDir . '/guzzle/guzzle/tests'),
+    'Guzzle' => array($vendorDir . '/guzzle/guzzle/src'),
+    'Dropbox' => array($vendorDir . '/dropbox/dropbox-sdk/lib'),
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib'),
-    'Doctrine\\Common\\Inflector\\' => array($vendorDir . '/doctrine/inflector/lib'),
-    'Doctrine\\Common\\Collections\\' => array($vendorDir . '/doctrine/collections/lib'),
-    'Assetic' => array($vendorDir . '/kriswallsmith/assetic/src'),
 );
