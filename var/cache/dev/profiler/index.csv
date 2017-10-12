@@ -10,3 +10,6 @@ f91740,127.0.0.1,GET,http://localhost:8000/admin,1492488762,,200
 ae2256,127.0.0.1,GET,http://localhost:8000/admin,1492489041,,200
 e06008,127.0.0.1,GET,http://localhost:8000/foo/page/9,1492489086,52b9a1,200
 52b9a1,127.0.0.1,GET,http://localhost:8000/foo/page/9,1492489086,,404
+0c0d93,127.0.0.1,GET,http://localhost:8000/foo/page/9,1492493337,e901db,200
+e901db,127.0.0.1,GET,http://localhost:8000/foo/page/9,1492493337,,404
+407d21,127.0.0.1,GET,http://localhost:8000/,1492493352,,200
